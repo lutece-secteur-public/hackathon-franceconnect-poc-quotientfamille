@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" >
 
     <bean id="quotientfamille.dataClientUser" class="fr.paris.lutece.plugins.quotientfamille.dataclient.UserDataClient">
-        <property name="name" value="user" />
+        <property name="name" value="quotientfamille.user" />
         <property name="dataServerUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo"/>
         <property name="tokenMethod" value="HEADER"/>
         <property name="scope">
@@ -20,7 +20,7 @@
     </bean>
 
     <bean id="quotientfamille.dataClientRevenu" class="fr.paris.lutece.plugins.quotientfamille.dataclient.RevenuDataClient">
-        <property name="name" value="revenu" />
+        <property name="name" value="quotientfamille.revenu" />
         <property name="dataServerUri" value="https://datafranceconnect.opendatasoft.com/api/records/1.0/search?dataset=dgfip_rfr"/>
         <property name="tokenMethod" value="HEADER"/>
         <property name="scope">

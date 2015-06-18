@@ -82,6 +82,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.paris.lutece.plugins.quotientfamille.business.QuotientFamilial;
 
 
 /**
@@ -91,7 +92,7 @@ public class UserRevenu implements Serializable
 {
     private static final long serialVersionUID = 1L;
     
-    private Integer nRFR;
+    private QuotientFamilial _qf;
 
     /**
      * Sets the Records
@@ -105,16 +106,16 @@ public class UserRevenu implements Serializable
         //
         Map<String, Object> record = ( Map<String,Object> ) records[0];
         Map<String, Object> fields = ( Map<String,Object> ) record.get( "fields" );
-        Integer RFR                = ( Integer )            fields.get( "rfr" );
-        nRFR = RFR;
+        _qf.setRevenuFiscalReference(  ( int ) fields.get( "rfr" ));
+        _qf.setNombreParts( ( int ) fields.get( "nombre_de_parts" ) );
     }
 
     /**
      * Returns the RFR
      * @return The RFR
      */
-    public Integer getRFR(  )
+    public QuotientFamilial getQuotientfamilial(  )
     {
-        return nRFR;
+        return _qf;
     }
 }
