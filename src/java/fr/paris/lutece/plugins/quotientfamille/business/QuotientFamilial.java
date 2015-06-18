@@ -42,7 +42,7 @@ public class QuotientFamilial
 {
     // Variables declarations 
     private int _nRevenuFiscalReference;
-    private int _nNombreParts;
+    private double _dNombreParts;
     
     
        /**
@@ -67,23 +67,23 @@ public class QuotientFamilial
         * Returns the NombreParts
         * @return The NombreParts
         */ 
-    public int getNombreParts()
+    public double getNombreParts()
     {
-        return _nNombreParts;
+        return _dNombreParts;
     }
     
        /**
         * Sets the NombreParts
         * @param nNombreParts The NombreParts
         */ 
-    public void setNombreParts( int nNombreParts )
+    public void setNombreParts( double nNombreParts )
     {
-        _nNombreParts = nNombreParts;
+        _dNombreParts = nNombreParts;
     }    
     
     
     public int getQuotient()
     {
-        return _nRevenuFiscalReference / ( 12 * _nNombreParts );
+        return _nRevenuFiscalReference / (int) ( 12.0 * _dNombreParts );
     }
 }

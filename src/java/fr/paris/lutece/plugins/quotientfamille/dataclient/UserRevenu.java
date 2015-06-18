@@ -104,10 +104,20 @@ public class UserRevenu implements Serializable
         //"rfr" : 54000,
         //"nombre_de_parts" : 3,
         //
+        
+        _qf = new QuotientFamilial();
+        if( records.length > 0 )
+        {    
         Map<String, Object> record = ( Map<String,Object> ) records[0];
         Map<String, Object> fields = ( Map<String,Object> ) record.get( "fields" );
-        _qf.setRevenuFiscalReference(  ( int ) fields.get( "rfr" ));
-        _qf.setNombreParts( ( int ) fields.get( "nombre_de_parts" ) );
+        _qf.setRevenuFiscalReference(   (int) fields.get( "rfr" ));
+        _qf.setNombreParts( (double) fields.get( "nombre_de_parts" ));
+        }
+        else
+        {
+            _qf.setRevenuFiscalReference( 0 );
+            _qf.setNombreParts( 1.0 );
+        }
     }
 
     /**
