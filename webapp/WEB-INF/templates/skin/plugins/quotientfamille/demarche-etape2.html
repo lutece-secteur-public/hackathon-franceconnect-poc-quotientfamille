@@ -1,29 +1,96 @@
-<br>
-<br>
-<div class="row-fluid">
-
-    <#include "includes/panel.html" />
-
-    <div class="col-md-6 well">
-        <h2>Votre inscription est confirmée :</h2>
-
-        <h4 style="color: black">Pour votre enfant
-            <strong>${form.prenomEnfant!'Prénom'} ${form.nomEnfant!'Nom'}</strong>,
-            le montant à régler pour un repas de cantine sera de <span
-                style="text-decoration:underline"><strong>3.64 euros</strong></span>.</h4>
-
-        <p><em>Pour information, votre revenu fiscal utilisé pour calculer le montant du règlement est
-                de ${montant!'3.25'} euros.
-                Cette information provient directement de l'administration fiscale.</em></p>
-
-        <p><em>Pour information, votre adresse est 20 rue Desaix, 75015 Paris. Cette information provient
-                directement d'EDF.</em></p>
-
-        <p><em>Pour information, votre attestation de droit provient directement de
-                l'assurance maladie.</em></p>
-
-        <p>
-            <a href="jsp/site/Portal.jsp?page=quotientfamille&view=demarcheFin" class="btn btn-primary">Valider</a>
-        </p>
-    </div>
+<div class="row">
+  <div class="col-md-12">
+    <h2>Demande de carte de stationnement r&eacute;sidentiel</h2>
+    <div class="well">
+      <form method="POST" id="crecheForm" class="form-horizontal" action="jsp/site/Portal.jsp">
+        <input type="hidden" name="page" value="quotientfamille">
+        <input type="hidden" name="action" value="processForm">
+        <div class="form-group">
+          <label for="sexe" class="col-sm-3 control-label" >Sexe</label>
+          <div class="col-sm-8">
+            <label class="radio-inline disabled">
+              <input type="radio" name="sexe" id="sexeF" value="0" disabled>F&eacute;minin
+            </label>
+            <label class="radio-inline disabled">
+              <input type="radio" name="sexe" id="sexeM" value="option2" disabled>Masculin
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="textinput-0" class="col-sm-3 control-label">Nom *</label>
+          <div class="col-sm-8">
+              <input id="textinput-0" name="textinput-0" type="text" placeholder="Nom" class="form-control"disabled  value="${lastname!''}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="textinput-1" class="col-sm-3 control-label">Pr&eacute;nom *</label>
+          <div class="col-sm-8">
+            <input id="textinput-1" name="textinput-1" type="text" placeholder="Pr&eacute;nom" class="form-control" disabled value="${firstname!''}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="textinput-0" class="col-sm-3 control-label">Nom d'usage *</label>
+          <div class="col-sm-8">
+              <input id="textinput-0" name="textinput-0" type="text" placeholder="Nom" class="form-control" disabled value="${lastname!''}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="votreAdresse" class="col-sm-3 control-label" >Votre adresse *</label>
+          <div class="col-sm-8">
+            <input id="votreAdresse" name="votreAdresse" type="text" placeholder="" class="form-control" disabled value="">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+              <p class="form-control-static lead">Revenu de r&eacute;f&eacute;rence : <strong>${qf.revenuFiscalReference} &euro;</strong></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <p class="form-control-static lead">Nombre de parts : <strong>${qf.nombreParts}</strong></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <p class="form-control-static lead">Votre quotient familial est de : <strong>${qf.quotient}</strong></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <p class="form-control-static lead">Votre tranche tarifaire est : <strong>{à calculer}</strong></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <p class="form-control-static"><strong>Tarifs applicables avec votre quotient familial</strong></p>
+            <p class="form-control-static">Classes de d&eacute;couverte par jour : 13,58 &euro;</p>
+            <p class="form-control-static">Centre de loisirs :</p>
+            <ul>
+              <li>Mercredi apr&egrave;s-midi : 2,67 &euro;</li>
+              <li>Vacances sans repas : 4,45 &euro;</li>
+              <li>Vacances avec repas : 8,07 &euro;</li>
+              <li>Etudes surveill&eacute;es : 5,70 &euro;</li>
+              <li>Ateliers bleus du soir : 11,93 &euro;</li>
+            </ul>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-8">
+            <a href="jsp/site/Portal.jsp?page=crm" class="btn btn-labeled btn-info">
+              <span class="btn-label">
+                <i class="fa fa-print"></i>
+              </span>
+              Imprimer
+            </a>
+            <a href="jsp/site/Portal.jsp?page=crm" class="btn btn-labeled btn-info">
+                <span class="btn-label">
+                  <i class="fa fa-user"></i>
+                </span>
+                Acc&eacute;der &agrave; votre espace personnalis&eacute;
+            </a>
+        </form>
+      </div>
+  </div>
+</div>
+</div>
 </div>

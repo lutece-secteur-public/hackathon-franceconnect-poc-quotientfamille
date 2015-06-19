@@ -31,42 +31,59 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.quotientfamille.dataclient;
 
-import fr.paris.lutece.plugins.quotientfamille.service.RedirectUtils;
-import fr.paris.lutece.plugins.quotientfamille.web.FranceConnectSampleApp;
-import fr.paris.lutece.plugins.franceconnect.oidc.Token;
-import fr.paris.lutece.plugins.franceconnect.oidc.dataclient.AbstractDataClient;
-import fr.paris.lutece.plugins.franceconnect.service.MapperService;
-import fr.paris.lutece.portal.service.util.AppLogService;
-
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+package fr.paris.lutece.plugins.quotientfamille.business;
 
 /**
- * RevenuDataClient
+ *
+ * @author levy
  */
-public class RevenuDataClient extends AbstractDataClient
+public class QuotientFamilial
 {
-
-    public static final String ATTRIBUTE_QUOTIENTFAMILIAL = "quotientfamille-dc-userrevenu";
-
-    @Override
-    public void handleToken( Token token, HttpServletRequest request, HttpServletResponse response )
+    // Variables declarations 
+    private int _nRevenuFiscalReference;
+    private double _dNombreParts;
+    
+    
+       /**
+        * Returns the RevenuFiscalReference
+        * @return The RevenuFiscalReference
+        */ 
+    public int getRevenuFiscalReference()
     {
-        try
-        {
-            UserRevenu userRevenu = MapperService.parse( getData( token ), UserRevenu.class );
-            request.getSession( true ).setAttribute(ATTRIBUTE_QUOTIENTFAMILIAL, userRevenu.getQuotientfamilial() );
-            String strRedirectUrl = RedirectUtils.getViewUrl( request, FranceConnectSampleApp.VIEW_DEMARCHE_ETAPE2 );
-            response.sendRedirect( strRedirectUrl );
-        }
-        catch ( IOException ex )
-        {
-            AppLogService.error( "Error DataClient Revenu : " + ex.getMessage(  ), ex );
-        }
+        return _nRevenuFiscalReference;
+    }
+    
+       /**
+        * Sets the RevenuFiscalReference
+        * @param nRevenuFiscalReference The RevenuFiscalReference
+        */ 
+    public void setRevenuFiscalReference( int nRevenuFiscalReference )
+    {
+        _nRevenuFiscalReference = nRevenuFiscalReference;
+    }
+    
+       /**
+        * Returns the NombreParts
+        * @return The NombreParts
+        */ 
+    public double getNombreParts()
+    {
+        return _dNombreParts;
+    }
+    
+       /**
+        * Sets the NombreParts
+        * @param nNombreParts The NombreParts
+        */ 
+    public void setNombreParts( double nNombreParts )
+    {
+        _dNombreParts = nNombreParts;
+    }    
+    
+    
+    public int getQuotient()
+    {
+        return _nRevenuFiscalReference / (int) ( 12.0 * _dNombreParts );
     }
 }

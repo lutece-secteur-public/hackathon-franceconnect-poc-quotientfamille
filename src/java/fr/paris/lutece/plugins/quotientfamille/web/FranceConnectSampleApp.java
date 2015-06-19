@@ -34,11 +34,13 @@
 package fr.paris.lutece.plugins.quotientfamille.web;
 
 import fr.paris.lutece.plugins.quotientfamille.business.FormData;
+import fr.paris.lutece.plugins.quotientfamille.dataclient.RevenuDataClient;
 import fr.paris.lutece.plugins.quotientfamille.dataclient.UserDataClient;
 import fr.paris.lutece.plugins.quotientfamille.service.DirectoryData;
 import fr.paris.lutece.plugins.quotientfamille.service.RedirectUtils;
 import fr.paris.lutece.plugins.franceconnect.oidc.UserInfo;
 import fr.paris.lutece.plugins.franceconnect.service.DataClientService;
+import fr.paris.lutece.plugins.quotientfamille.business.QuotientFamilial;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.xpage.MVCApplication;
@@ -74,10 +76,12 @@ public class FranceConnectSampleApp extends MVCApplication
     private static final String MARK_LASTNAME = "lastname";
     private static final String MARK_FIRSTNAME = "firstname";
     private static final String MARK_FORM_DATA = "form";
-    private static final String DATACLIENT_USER = "user";
-    private static final String DATACLIENT_REVENU = "revenu";
+    private static final String MARK_QUOTIENT_FAMILIAL = "qf";
+    private static final String DATACLIENT_USER = "quotientfamille.user";
+    private static final String DATACLIENT_REVENU = "quotientfamille.revenu";
     private static final long serialVersionUID = 1L;
     private UserInfo _userInfo;
+    private QuotientFamilial _quotientFamilial;
     private FormData _formData;
     private DirectoryData _directoryData=new DirectoryData();;
 
@@ -170,6 +174,8 @@ public class FranceConnectSampleApp extends MVCApplication
     {
         Map<String, Object> model = getModel(  );
         model.put( MARK_FORM_DATA, _formData );
+        _quotientFamilial = (QuotientFamilial) request.getSession(  ).getAttribute(RevenuDataClient.ATTRIBUTE_QUOTIENTFAMILIAL );
+        model.put( MARK_QUOTIENT_FAMILIAL, _quotientFamilial );
 
         return getXPage( TEMPLATE_DEMARCHE_ETAPE2, request.getLocale(  ), model );
     }
