@@ -31,6 +31,18 @@ public final class DirectoryDataService {
   @SuppressWarnings("deprecation")
   public static void pushInDirectory(DirectoryData directoryData, HttpServletRequest request)
   {
+    LuteceUser user = null;
+    try {
+      user = SecurityService.getInstance().getRemoteUser(request);
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      AppLogService.error( "Error DirectoryDataService " + e);
+      e.printStackTrace();
+    }
+    if (user == null) {
+      return;
+    }
+
     
      IRecordService _recordService = SpringContextService.getBean( RecordService.BEAN_SERVICE );
     
@@ -126,10 +138,11 @@ public final class DirectoryDataService {
     
     ICRMClientService _crmClientService = SpringContextService.getBean( CRMClientService.BEAN_SERVICE );
     String _strIdDemandeType=AppPropertiesService.getProperty("idDemandeType","2");
+    String strCrmDemande;
     try {
-      LuteceUser user = SecurityService.getInstance().getRemoteUser(request);
-      String strCrmDemande = _crmClientService.sendCreateDemandByUserGuid(_strIdDemandeType,
-          user.getName(), "1", "En attente de traitement", "");
+      strCrmDemande = _crmClientService.sendCreateDemandByUserGuid(
+          _strIdDemandeType, user.getName(), "1",
+          "En attente de traitement", "");
       Entry entryCrmDemande=new Entry();
       entryCrmDemande.setIdEntry(_strCrmDemande);
       RecordField recordFieldCrmDemande=new RecordField();
@@ -137,20 +150,18 @@ public final class DirectoryDataService {
       recordFieldCrmDemande.setValue(strCrmDemande);
       recordFieldCrmDemande.setRecord(record);
       listRecordField.add(recordFieldCrmDemande);
-
-      Entry entryCrmUser=new Entry();
-      entryCrmUser.setIdEntry(_strCrmUser);
-      RecordField recordFieldCrmUser=new RecordField();
-      recordFieldCrmUser.setEntry(entryCrmUser);
-      recordFieldCrmUser.setValue(user.getName());
-      recordFieldCrmUser.setRecord(record);
-      listRecordField.add(recordFieldCrmUser);
-
-    } catch (CRMException | UserNotSignedException e) {
+    } catch (CRMException e) {
       // TODO Auto-generated catch block
-      AppLogService.error( "Error DirectoryDataService " + e);
       e.printStackTrace();
     }
+
+    Entry entryCrmUser=new Entry();
+    entryCrmUser.setIdEntry(_strCrmUser);
+    RecordField recordFieldCrmUser=new RecordField();
+    recordFieldCrmUser.setEntry(entryCrmUser);
+    recordFieldCrmUser.setValue(user.getName());
+    recordFieldCrmUser.setRecord(record);
+    listRecordField.add(recordFieldCrmUser);
 
     record.setListRecordField( listRecordField );
     
