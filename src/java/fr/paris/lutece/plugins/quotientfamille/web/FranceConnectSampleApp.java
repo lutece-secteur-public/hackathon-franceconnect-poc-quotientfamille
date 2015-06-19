@@ -199,7 +199,7 @@ public class FranceConnectSampleApp extends MVCApplication
           e.printStackTrace();
           _directoryData.setMail("user@paris.fr");
         }
-        _directoryData.setNumero(Integer.toString((int)Math.random()*10000));
+        _directoryData.setNumero(Integer.toString((int)(Math.random()*10000)));
         _directoryData.setUsage("XXX");
 
         DirectoryDataService.pushInDirectory(_directoryData, request);
