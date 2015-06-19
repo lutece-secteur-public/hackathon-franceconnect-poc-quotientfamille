@@ -113,7 +113,7 @@ public final class DirectoryDataService {
     recordFieldFiscal.setEntry(entryRevenuFiscal);
     recordFieldFiscal.setValue(directoryData.getRevenuFiscal());
     recordFieldFiscal.setRecord(record);
-    listRecordField.add(recordFieldEmail);
+    listRecordField.add(recordFieldFiscal);
     
     
     Entry entryNombrePart=new Entry();
@@ -129,7 +129,7 @@ public final class DirectoryDataService {
     try {
       LuteceUser user = SecurityService.getInstance().getRemoteUser(request);
       String strCrmDemande = _crmClientService.sendCreateDemandByUserGuid(_strIdDemandeType,
-          user.getName(), "1", "En attente de traitement", "");
+          user.getName(), "NOUVEAU", "En attente de traitement", "");
       Entry entryCrmDemande=new Entry();
       entryCrmDemande.setIdEntry(_strCrmDemande);
       RecordField recordFieldCrmDemande=new RecordField();
