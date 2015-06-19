@@ -7,8 +7,15 @@
   <input type="hidden" name="page" value="quotientfamille">
   <input type="hidden" name="action" value="processForm">
   <div class="row">
-    <div class="col-sm-6">
-      <div class="jumbotron">
+    <div class="col-sm-4">
+      <div class="panel panel-info" data-effect="helix">
+        <div class="panel-heading">Vos infos</div>
+        <div class="panel-body">
+          <p>${firstname!''} ${lastname!''}</p>
+          <p>${address!''}</p>
+        </div>
+      </div>
+
         <!--
         <div class="form-group">
             <label for="sexe" class="col-sm-3 control-label" >Civilit&eacute;</label>
@@ -22,33 +29,10 @@
           </div>
         </div>
       -->
-        <div class="form-group">
-          <label for="textinput-0" class="col-sm-3 control-label">Nom *</label>
-          <div class="col-sm-8">
-                <p class="form-control-static">${lastname!''}</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="textinput-1" class="col-sm-3 control-label">Pr&eacute;nom *</label>
-          <div class="col-sm-8">
-              <p class="form-control-static">${firstname!''}</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="textinput-0" class="col-sm-3 control-label">Nom d'usage *</label>
-          <div class="col-sm-8">
-              <p class="form-control-static">${lastname!''}</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="votreAdresse" class="col-sm-3 control-label" >Votre adresse *</label>
-          <div class="col-sm-8">
-            <p class="form-control-static">${address!''}</p>
-          </div>
-        </div>
+
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
       <div class="jumbotron">
         <div class="form-group">
           <div class="col-sm-offset-3 col-sm-9">
@@ -75,6 +59,7 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
+      <div class="jumbotron">
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
             <p class="form-control-static"><strong>Tarifs applicables avec votre quotient familial</strong></p>
@@ -87,6 +72,7 @@
               <li>Etudes surveill&eacute;es : 5,70 &euro;</li>
               <li>Ateliers bleus du soir : 11,93 &euro;</li>
             </ul>
+          </div>
         </div>
       </div>
     </div>
