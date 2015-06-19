@@ -3,7 +3,7 @@
       <h1>Quotient familial et tarifs</h1>
   </div>
 </div>
-<form method="POST" id="crecheForm" class="form-horizontal" action="jsp/site/Portal.jsp">
+<form id="qf" method="POST" id="crecheForm" class="form-horizontal" action="jsp/site/Portal.jsp">
   <input type="hidden" name="page" value="quotientfamille">
   <input type="hidden" name="action" value="processForm">
   <div class="row">
@@ -70,8 +70,13 @@
             <p class="form-control-static lead">Votre tranche tarifaire est : <strong>${qf.tranche}</strong></p>
           </div>
         </div>
-        <div class="form-group">
-          <div class="col-sm-offset-3 col-sm-9">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
             <p class="form-control-static"><strong>Tarifs applicables avec votre quotient familial</strong></p>
             <p class="form-control-static">Classes de d&eacute;couverte par jour : 13,58 &euro;</p>
             <p class="form-control-static">Centre de loisirs :</p>
@@ -82,7 +87,6 @@
               <li>Etudes surveill&eacute;es : 5,70 &euro;</li>
               <li>Ateliers bleus du soir : 11,93 &euro;</li>
             </ul>
-          </div>
         </div>
       </div>
     </div>
