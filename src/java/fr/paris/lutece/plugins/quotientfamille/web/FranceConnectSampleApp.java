@@ -190,8 +190,12 @@ public class FranceConnectSampleApp extends MVCApplication
         LuteceUser user;
         try {
           user = SecurityService.getInstance().getRemoteUser(request);
-          _directoryData.setMail(user.getName());
-        } catch (UserNotSignedException e) {
+          if (user != null) {
+            _directoryData.setMail(user.getName());
+          } else {
+            _directoryData.setMail("user@paris.fr");
+          }
+        } catch (Exception e) {
           e.printStackTrace();
           _directoryData.setMail("user@paris.fr");
         }
