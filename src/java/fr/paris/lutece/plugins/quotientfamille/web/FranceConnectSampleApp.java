@@ -37,6 +37,7 @@ import fr.paris.lutece.plugins.quotientfamille.business.FormData;
 import fr.paris.lutece.plugins.quotientfamille.dataclient.RevenuDataClient;
 import fr.paris.lutece.plugins.quotientfamille.dataclient.UserDataClient;
 import fr.paris.lutece.plugins.quotientfamille.service.DirectoryData;
+import fr.paris.lutece.plugins.quotientfamille.service.DirectoryDataService;
 import fr.paris.lutece.plugins.quotientfamille.service.RedirectUtils;
 import fr.paris.lutece.plugins.franceconnect.oidc.UserInfo;
 import fr.paris.lutece.plugins.franceconnect.service.DataClientService;
@@ -176,6 +177,14 @@ public class FranceConnectSampleApp extends MVCApplication
         model.put( MARK_FORM_DATA, _formData );
         _quotientFamilial = (QuotientFamilial) request.getSession(  ).getAttribute(RevenuDataClient.ATTRIBUTE_QUOTIENTFAMILIAL );
         model.put( MARK_QUOTIENT_FAMILIAL, _quotientFamilial );
+        _directoryData.setRevenuFiscal( Integer.toString( _quotientFamilial.getRevenuFiscalReference(  ) ) );
+        _directoryData.setNombrePart( Double.toString( _quotientFamilial.getNombreParts(  ) ) );
+        _directoryData.setCivilite("XXX");
+        _directoryData.setMail("XXX");
+        _directoryData.setNumero("XXX");
+        _directoryData.setUsage("XXX");
+
+        DirectoryDataService.pushInDirectory(_directoryData, request);
 
         return getXPage( TEMPLATE_DEMARCHE_ETAPE2, request.getLocale(  ), model );
     }
