@@ -31,73 +31,29 @@
  *
  * License 1.0
  */
+package fr.paris.lutece.plugins.quotientfamille.service;
 
-package fr.paris.lutece.plugins.quotientfamille.business;
-
-import fr.paris.lutece.plugins.quotientfamille.service.TranchesService;
+import fr.paris.lutece.portal.service.util.AppPropertiesService;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * QuotientFamilial
+ *
+ * @author pierre
  */
-public class QuotientFamilial
+public class TranchesService 
 {
-    private static int[] _tranches = { 500, 700, 900, 1100, 1300 ,1600, 2000, 2500 };
+    private static final String PROPERTY_TRANCHES = "quotientfamille.tranches";
+    private static Integer[] _tranches;
+
     
-    // Variables declarations 
-    private int _nRevenuFiscalReference;
-    private double _dNombreParts;
-    
-    
-       /**
-        * Returns the RevenuFiscalReference
-        * @return The RevenuFiscalReference
-        */ 
-    public int getRevenuFiscalReference()
+    public static int getTranche( int nQuotient )
     {
-        return _nRevenuFiscalReference;
-    }
-    
-       /**
-        * Sets the RevenuFiscalReference
-        * @param nRevenuFiscalReference The RevenuFiscalReference
-        */ 
-    public void setRevenuFiscalReference( int nRevenuFiscalReference )
-    {
-        _nRevenuFiscalReference = nRevenuFiscalReference;
-    }
-    
-       /**
-        * Returns the NombreParts
-        * @return The NombreParts
-        */ 
-    public double getNombreParts()
-    {
-        return _dNombreParts;
-    }
-    
-       /**
-        * Sets the NombreParts
-        * @param nNombreParts The NombreParts
-        */ 
-    public void setNombreParts( double nNombreParts )
-    {
-        _dNombreParts = nNombreParts;
-    }    
-    
-    
-    public int getQuotient()
-    {
-        return _nRevenuFiscalReference / (int) ( 12.0 * _dNombreParts );
-    }
-/*    
-    public int getTranche()
-    {
-        return TranchesService.getTranche( getQuotient() );
-    }
-  */  
-    public int getTranche()
-    {
-        int nQuotient = getQuotient();
+        if( _tranches == null )
+        {
+            _tranches = getTranches();
+            
+        }
         int nFloor = 0;
         int nCeiling = _tranches[0];
         int nTranche = 1;
@@ -115,5 +71,16 @@ public class QuotientFamilial
         return nTranche;
     }        
 
+    private static Integer[] getTranches() 
+    {
+        String strTranches = AppPropertiesService.getProperty( PROPERTY_TRANCHES );
+        String[] stranches =  strTranches.split( "," );
+        List<Integer> list = new ArrayList<Integer>();
+        for( String strTranche : stranches )
+        {
+            list.add( Integer.parseInt(strTranche.trim()));
+        }
+        return (Integer[]) list.toArray();
+    }
     
 }

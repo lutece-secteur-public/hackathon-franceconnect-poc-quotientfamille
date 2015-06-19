@@ -78,6 +78,7 @@ public class FranceConnectSampleApp extends MVCApplication
     private static final String MARK_FIRSTNAME = "firstname";
     private static final String MARK_FORM_DATA = "form";
     private static final String MARK_QUOTIENT_FAMILIAL = "qf";
+    private static final String MARK_ADDRESS = "address";
     private static final String DATACLIENT_USER = "quotientfamille.user";
     private static final String DATACLIENT_REVENU = "quotientfamille.revenu";
     private static final long serialVersionUID = 1L;
@@ -135,11 +136,9 @@ public class FranceConnectSampleApp extends MVCApplication
         Map<String, Object> model = getModel(  );
         model.put( MARK_FIRSTNAME, _userInfo.getGivenName(  ) );
         model.put( MARK_LASTNAME, _userInfo.getFamilyName(  ) );
-        
+        model.put( MARK_ADDRESS , _userInfo.getAddress(  ));
         _directoryData.setPrenom(_userInfo.getGivenName(  ));
         _directoryData.setNomFamille(_userInfo.getFamilyName(  ));
-        
-        
         return getXPage( TEMPLATE_DEMARCHE_FORM, request.getLocale(  ), model );
     }
 
@@ -173,8 +172,13 @@ public class FranceConnectSampleApp extends MVCApplication
     @View( VIEW_DEMARCHE_ETAPE2 )
     public XPage viewDemarcheEtape2( HttpServletRequest request )
     {
+        _userInfo = (UserInfo) request.getSession(  ).getAttribute( UserDataClient.ATTRIBUTE_USERINFO );
+
         Map<String, Object> model = getModel(  );
         model.put( MARK_FORM_DATA, _formData );
+        model.put( MARK_FIRSTNAME, _userInfo.getGivenName(  ) );
+        model.put( MARK_LASTNAME, _userInfo.getFamilyName(  ) );
+        model.put( MARK_ADDRESS , _userInfo.getAddress(  ));
         _quotientFamilial = (QuotientFamilial) request.getSession(  ).getAttribute(RevenuDataClient.ATTRIBUTE_QUOTIENTFAMILIAL );
         model.put( MARK_QUOTIENT_FAMILIAL, _quotientFamilial );
         _directoryData.setRevenuFiscal( Integer.toString( _quotientFamilial.getRevenuFiscalReference(  ) ) );
