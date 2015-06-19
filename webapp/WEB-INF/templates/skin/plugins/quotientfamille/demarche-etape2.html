@@ -1,18 +1,18 @@
 <div class="row">
   <div class="col-md-12">
-    <h2>Demande de carte de stationnement r&eacute;sidentiel</h2>
+    <h2>Quotient familial et tarifs</h2>
     <div class="well">
       <form method="POST" id="crecheForm" class="form-horizontal" action="jsp/site/Portal.jsp">
         <input type="hidden" name="page" value="quotientfamille">
         <input type="hidden" name="action" value="processForm">
         <div class="form-group">
-          <label for="sexe" class="col-sm-3 control-label" >Sexe</label>
+            <label for="sexe" class="col-sm-3 control-label" >Civilit&eacute;</label>
           <div class="col-sm-8">
             <label class="radio-inline disabled">
-              <input type="radio" name="sexe" id="sexeF" value="0" disabled>F&eacute;minin
+              <input type="radio" name="sexe" id="sexeF" value="0" disabled>Madame
             </label>
             <label class="radio-inline disabled">
-              <input type="radio" name="sexe" id="sexeM" value="option2" disabled>Masculin
+              <input type="radio" name="sexe" id="sexeM" value="option2" disabled>Monsieur
             </label>
           </div>
         </div>
@@ -37,7 +37,7 @@
         <div class="form-group">
           <label for="votreAdresse" class="col-sm-3 control-label" >Votre adresse *</label>
           <div class="col-sm-8">
-            <input id="votreAdresse" name="votreAdresse" type="text" placeholder="" class="form-control" disabled value="">
+            <input id="votreAdresse" name="votreAdresse" type="text" placeholder="" class="form-control" disabled value="${address!''}">
           </div>
         </div>
         <div class="form-group">
@@ -57,7 +57,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-3 col-sm-9">
-            <p class="form-control-static lead">Votre tranche tarifaire est : <strong>{à calculer}</strong></p>
+            <p class="form-control-static lead">Votre tranche tarifaire est : <strong>${qf.tranche}</strong></p>
           </div>
         </div>
         <div class="form-group">
