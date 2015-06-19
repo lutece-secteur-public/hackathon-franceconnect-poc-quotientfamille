@@ -35,6 +35,7 @@ package fr.paris.lutece.plugins.quotientfamille.web;
 
 import fr.paris.lutece.plugins.quotientfamille.business.FormData;
 import fr.paris.lutece.plugins.quotientfamille.dataclient.UserDataClient;
+import fr.paris.lutece.plugins.quotientfamille.service.DirectoryData;
 import fr.paris.lutece.plugins.quotientfamille.service.RedirectUtils;
 import fr.paris.lutece.plugins.franceconnect.oidc.UserInfo;
 import fr.paris.lutece.plugins.franceconnect.service.DataClientService;
@@ -78,6 +79,7 @@ public class FranceConnectSampleApp extends MVCApplication
     private static final long serialVersionUID = 1L;
     private UserInfo _userInfo;
     private FormData _formData;
+    private DirectoryData _directoryData=new DirectoryData();;
 
     /**
      * Returns the content of the page quotientfamille.
@@ -128,7 +130,11 @@ public class FranceConnectSampleApp extends MVCApplication
         Map<String, Object> model = getModel(  );
         model.put( MARK_FIRSTNAME, _userInfo.getGivenName(  ) );
         model.put( MARK_LASTNAME, _userInfo.getFamilyName(  ) );
-
+        
+        _directoryData.setPrenom(_userInfo.getGivenName(  ));
+        _directoryData.setNomFamille(_userInfo.getFamilyName(  ));
+        
+        
         return getXPage( TEMPLATE_DEMARCHE_FORM, request.getLocale(  ), model );
     }
 
