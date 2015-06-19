@@ -42,6 +42,9 @@ import fr.paris.lutece.plugins.quotientfamille.service.RedirectUtils;
 import fr.paris.lutece.plugins.franceconnect.oidc.UserInfo;
 import fr.paris.lutece.plugins.franceconnect.service.DataClientService;
 import fr.paris.lutece.plugins.quotientfamille.business.QuotientFamilial;
+import fr.paris.lutece.portal.service.security.LuteceUser;
+import fr.paris.lutece.portal.service.security.SecurityService;
+import fr.paris.lutece.portal.service.security.UserNotSignedException;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.xpage.MVCApplication;
@@ -184,8 +187,15 @@ public class FranceConnectSampleApp extends MVCApplication
         _directoryData.setRevenuFiscal( Integer.toString( _quotientFamilial.getRevenuFiscalReference(  ) ) );
         _directoryData.setNombrePart( Double.toString( _quotientFamilial.getNombreParts(  ) ) );
         _directoryData.setCivilite("XXX");
-        _directoryData.setMail("XXX");
-        _directoryData.setNumero("XXX");
+        LuteceUser user;
+        try {
+          user = SecurityService.getInstance().getRemoteUser(request);
+          _directoryData.setMail(user.getName());
+        } catch (UserNotSignedException e) {
+          e.printStackTrace();
+          _directoryData.setMail("user@paris.fr");
+        }
+        _directoryData.setNumero(Integer.toString((int)Math.random()*10000));
         _directoryData.setUsage("XXX");
 
         DirectoryDataService.pushInDirectory(_directoryData, request);
