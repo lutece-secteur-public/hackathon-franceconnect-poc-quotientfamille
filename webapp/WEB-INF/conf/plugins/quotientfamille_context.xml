@@ -21,11 +21,12 @@
 
     <bean id="quotientfamille.dataClientRevenu" class="fr.paris.lutece.plugins.quotientfamille.dataclient.RevenuDataClient">
         <property name="name" value="quotientfamille.revenu" />
-        <property name="dataServerUri" value="https://datafranceconnect.opendatasoft.com/api/records/1.0/search?dataset=dgfip_rfr"/>
+        <property name="dataServerUri" value="https://cft.impots.gouv.fr/impotparticulier/os1/2016"/>
         <property name="tokenMethod" value="HEADER"/>
         <property name="scope">
             <set value-type="java.lang.String">
-                <value>ods_dgfip_rfr</value>
+                <value>dgfip_rfr</value>
+                <value>dgfip_nbpart</value>
             </set>
         </property>
     </bean>

@@ -33,47 +33,8 @@
  */
 
 /*
-Sample from dgfip (mockup from opendatasoft)
-{
-   "parameters" : {
-      "rows" : 10,
-      "dataset" : [
-         "dgfip_rfr"
-      ],
-      "format" : "json",
-      "timezone" : "UTC"
-   },
-   "nhits" : 1,
-   "records" : [
-      {
-         "fields" : {
-            "pays_de_naissance" : "99100",
-            "nom_d_usage" : "PETIT",
-            "prenom_de_naissance_enfants" : "PIERRE, LUCIEN",
-            "date_de_naissance" : "1985-01-05",
-            "nom_de_naissance_du_conjoint" : "PETIT",
-            "sexe" : "female",
-            "prenoms" : "Patricia",
-            "nom_de_naissance" : "AMA",
-            "rfr" : 54000,
-            "hypothese_dgfip" : "Couple marié avec PETIT, 2 enfants (né en 2010 et 2013), revenu 30K€+30K€, nés en 1983 et 85, vivent en métropole",
-            "reference_de_l_avis" : "15 78A001138 37",
-            "p237" : "https://doc.integ01.dev-franceconnect.fr/tmp/P237.pdf",
-            "avisn_1" : "https://doc.integ01.dev-franceconnect.fr/tmp/Petit 2015.pdf",
-            "prenom_de_naissance_du_conjoint" : "Francois -Pierre",
-            "nombre_de_parts" : 3,
-            "lieu_de_naissance" : "91471",
-            "avisn_2" : "https://doc.integ01.dev-franceconnect.fr/tmp/Petit 2014.pdf",
-            "situation_foyer" : "M",
-            "avisn_3" : "https://doc.integ01.dev-franceconnect.fr/tmp/Petit 2013.pdf"
-         },
-         "recordid" : "2f567b361eaafb712cfdb1c5bc28e099c2f32310",
-         "datasetid" : "dgfip_rfr",
-         "record_timestamp" : "2015-06-17T15:46:07+00:00"
-      }
-   ]
-}
- *
+Sample from dgfip
+ * {"rfr":0,"nbPart":1.0}
  */
 
 package fr.paris.lutece.plugins.quotientfamille.dataclient;
@@ -92,32 +53,26 @@ public class UserRevenu implements Serializable
 {
     private static final long serialVersionUID = 1L;
     
-    private QuotientFamilial _qf;
+    private QuotientFamilial _qf = new QuotientFamilial();
 
     /**
      * Sets the Records
      * @param records The Records
      */
-    @JsonProperty( "records" )
-    public void setRecords( Object[] records )
+    @JsonProperty( "nbPart" )
+    public void setNbPart( double nbPart )
     {
-        //"rfr" : 54000,
-        //"nombre_de_parts" : 3,
-        //
-        
-        _qf = new QuotientFamilial();
-        if( records.length > 0 )
-        {    
-        Map<String, Object> record = ( Map<String,Object> ) records[0];
-        Map<String, Object> fields = ( Map<String,Object> ) record.get( "fields" );
-        _qf.setRevenuFiscalReference(   (int) fields.get( "rfr" ));
-        _qf.setNombreParts( (double) fields.get( "nombre_de_parts" ));
-        }
-        else
-        {
-            _qf.setRevenuFiscalReference( 0 );
-            _qf.setNombreParts( 1.0 );
-        }
+        _qf.setNombreParts( nbPart );
+    }
+
+    /**
+     * Sets the Records
+     * @param records The Records
+     */
+    @JsonProperty( "rfr" )
+    public void setRfr( int rfr )
+    {
+        _qf.setRevenuFiscalReference( rfr );
     }
 
     /**
