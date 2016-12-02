@@ -6,7 +6,7 @@
 
     <bean id="quotientfamille.dataClientUser" class="fr.paris.lutece.plugins.quotientfamille.dataclient.UserDataClient">
         <property name="name" value="quotientfamille.user" />
-        <property name="dataServerUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo"/>
+        <property name="dataServerUri" value="https://pp.dev-franceconnect.fr/api/v1/userinfo"/>
         <property name="tokenMethod" value="HEADER"/>
         <property name="scope">
             <set value-type="java.lang.String">
@@ -21,7 +21,7 @@
 
     <bean id="quotientfamille.dataClientRevenu" class="fr.paris.lutece.plugins.quotientfamille.dataclient.RevenuDataClient">
         <property name="name" value="quotientfamille.revenu" />
-        <property name="dataServerUri" value="https://cft.impots.gouv.fr/impotparticulier/os1/2016"/>
+        <property name="dataServerUri" value="https://cft.impots.gouv.fr/impotparticulier/os1/2015"/>
         <property name="tokenMethod" value="HEADER"/>
         <property name="scope">
             <set value-type="java.lang.String">
