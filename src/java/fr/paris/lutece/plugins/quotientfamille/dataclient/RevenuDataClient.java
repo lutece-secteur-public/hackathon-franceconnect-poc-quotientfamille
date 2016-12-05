@@ -59,13 +59,7 @@ public class RevenuDataClient extends AbstractDataClient
     {
         try
         {
-            UserRevenu userRevenu;
-            try {
-                userRevenu = MapperService.parse( getData( token ), UserRevenu.class );
-            } catch (Exception E) {
-                //TODO fake date in case of error. To fix. Requested by Yvan
-                userRevenu = MapperService.parse( "{\"rfr\":32702,\"nbPart\":1.5}", UserRevenu.class );
-            }
+            UserRevenu userRevenu = MapperService.parse( getData( token ), UserRevenu.class );
             request.getSession( true ).setAttribute(ATTRIBUTE_QUOTIENTFAMILIAL, userRevenu.getQuotientfamilial() );
             String strRedirectUrl = RedirectUtils.getViewUrl( request, FranceConnectSampleApp.VIEW_DEMARCHE_ETAPE2 );
             response.sendRedirect( strRedirectUrl );
