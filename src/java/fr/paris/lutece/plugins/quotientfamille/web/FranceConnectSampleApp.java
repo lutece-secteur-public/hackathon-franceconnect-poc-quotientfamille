@@ -183,26 +183,28 @@ public class FranceConnectSampleApp extends MVCApplication
         model.put( MARK_LASTNAME, _userInfo.getFamilyName(  ) );
         model.put( MARK_ADDRESS , _userInfo.getAddress(  ));
         _quotientFamilial = (QuotientFamilial) request.getSession(  ).getAttribute(RevenuDataClient.ATTRIBUTE_QUOTIENTFAMILIAL );
-        model.put( MARK_QUOTIENT_FAMILIAL, _quotientFamilial );
-        _directoryData.setRevenuFiscal( Integer.toString( _quotientFamilial.getRevenuFiscalReference(  ) ) );
-        _directoryData.setNombrePart( Double.toString( _quotientFamilial.getNombreParts(  ) ) );
-        _directoryData.setCivilite("XXX");
-        LuteceUser user;
-        try {
-          user = SecurityService.getInstance().getRemoteUser(request);
-          if (user != null) {
-            _directoryData.setMail(user.getName());
-          } else {
-            _directoryData.setMail("user@paris.fr");
-          }
-        } catch (Exception e) {
-          e.printStackTrace();
-          _directoryData.setMail("user@paris.fr");
-        }
-        _directoryData.setNumero(Integer.toString((int)(Math.random()*10000)));
-        _directoryData.setUsage("XXX");
+        if ( _quotientFamilial != null ) {
+            model.put( MARK_QUOTIENT_FAMILIAL, _quotientFamilial );
+            _directoryData.setRevenuFiscal( Integer.toString( _quotientFamilial.getRevenuFiscalReference(  ) ) );
+            _directoryData.setNombrePart( Double.toString( _quotientFamilial.getNombreParts(  ) ) );
+            _directoryData.setCivilite("XXX");
+            LuteceUser user;
+            try {
+              user = SecurityService.getInstance().getRemoteUser(request);
+              if (user != null) {
+                _directoryData.setMail(user.getName());
+              } else {
+                _directoryData.setMail("user@paris.fr");
+              }
+            } catch (Exception e) {
+              e.printStackTrace();
+              _directoryData.setMail("user@paris.fr");
+            }
+            _directoryData.setNumero(Integer.toString((int)(Math.random()*10000)));
+            _directoryData.setUsage("XXX");
 
-        DirectoryDataService.pushInDirectory(_directoryData, request);
+            DirectoryDataService.pushInDirectory(_directoryData, request);
+        }
 
         return getXPage( TEMPLATE_DEMARCHE_ETAPE2, request.getLocale(  ), model );
     }

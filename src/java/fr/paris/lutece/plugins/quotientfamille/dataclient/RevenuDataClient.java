@@ -45,6 +45,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 
 /**
  * RevenuDataClient
@@ -59,8 +60,11 @@ public class RevenuDataClient extends AbstractDataClient
     {
         try
         {
-            UserRevenu userRevenu = MapperService.parse( getData( token ), UserRevenu.class );
-            request.getSession( true ).setAttribute(ATTRIBUTE_QUOTIENTFAMILIAL, userRevenu.getQuotientfamilial() );
+            String data = getData( token );
+            if ( StringUtils.isNotEmpty( data ) ) {
+                UserRevenu userRevenu = MapperService.parse( data, UserRevenu.class );
+                request.getSession( true ).setAttribute(ATTRIBUTE_QUOTIENTFAMILIAL, userRevenu.getQuotientfamilial() );
+            }
             String strRedirectUrl = RedirectUtils.getViewUrl( request, FranceConnectSampleApp.VIEW_DEMARCHE_ETAPE2 );
             response.sendRedirect( strRedirectUrl );
         }
