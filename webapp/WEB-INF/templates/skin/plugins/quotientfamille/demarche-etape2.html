@@ -18,6 +18,7 @@
     </div>
     <div class="col-xs-12 col-sm-4">
       <div class="jumbotron">
+        <#if qf??>
         <div class="form-group">
           <div class="col-sm-12">
               <p class="form-control-static lead">Revenu de r&eacute;f&eacute;rence : <strong>${qf.revenuFiscalReference!} &euro;</strong></p>
@@ -53,6 +54,9 @@
             <p class="form-control-static">&nbsp;</p>
           </div>
         </div>
+        <#else>
+        <div class="alert alert-danger" role="alert">Erreur lors de la récupération des infos depuis la dgfip.</div>
+        </#if>
       </div>
     </div>
     <div class="col-xs-12 col-sm-4">
