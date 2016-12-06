@@ -21,12 +21,14 @@
 
     <bean id="quotientfamille.dataClientRevenu" class="fr.paris.lutece.plugins.quotientfamille.dataclient.RevenuDataClient">
         <property name="name" value="quotientfamille.revenu" />
-        <property name="dataServerUri" value="https://cft.integration.impots.gouv.fr/impotparticulier/os1/2015"/>
+        <property name="dataServerUriOs1" value="https://cft.integration.impots.gouv.fr/impotparticulier/os1/2015"/>
+        <property name="dataServerUriOs2" value="https://cft.integration.impots.gouv.fr/impotparticulier/os2/2015"/>
         <property name="tokenMethod" value="HEADER"/>
         <property name="scope">
             <set value-type="java.lang.String">
                 <value>dgfip_rfr</value>
                 <value>dgfip_nbpart</value>
+                <value>dgfip_aft</value>
             </set>
         </property>
     </bean>

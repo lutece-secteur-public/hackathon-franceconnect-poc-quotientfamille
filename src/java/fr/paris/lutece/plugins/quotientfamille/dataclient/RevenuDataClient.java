@@ -53,17 +53,52 @@ import org.apache.commons.lang.StringUtils;
 public class RevenuDataClient extends AbstractDataClient
 {
 
+    //This dataclient needs to access multiple endpoints.
+    //TODO improve the AbstractDataClient to have a simpler way to do it
+    private String _strDataServerUriOs1;
+    private String _strDataServerUriOs2;
+
+    public String getDataServerUriOs1(  )
+    {
+        return _strDataServerUriOs1;
+    }
+
+    public void setDataServerUriOs1( String strDataServerUri )
+    {
+        _strDataServerUriOs1 = strDataServerUri;
+    }
+
+    public String getDataServerUriOs2(  )
+    {
+        return _strDataServerUriOs2;
+    }
+
+    public void setDataServerUriOs2( String strDataServerUri )
+    {
+        _strDataServerUriOs2 = strDataServerUri;
+    }
+
     public static final String ATTRIBUTE_QUOTIENTFAMILIAL = "quotientfamille-dc-userrevenu";
+    public static final String ATTRIBUTE_ADDRESSEFISCALE = "quotientfamille-dc-useraddresse";
 
     @Override
-    public void handleToken( Token token, HttpServletRequest request, HttpServletResponse response )
+    //Synchronized because we modify DataServerUri to access multiple endpoints
+    public synchronized void handleToken( Token token, HttpServletRequest request, HttpServletResponse response )
     {
         try
         {
+            //TODO improve AbstractDataClient API to not have to mutate DataServerUri...
+            setDataServerUri( getDataServerUriOs1(  ) );
             String data = getData( token );
             if ( StringUtils.isNotEmpty( data ) ) {
                 UserRevenu userRevenu = MapperService.parse( data, UserRevenu.class );
                 request.getSession( true ).setAttribute(ATTRIBUTE_QUOTIENTFAMILIAL, userRevenu.getQuotientfamilial() );
+            }
+            setDataServerUri( getDataServerUriOs2(  ) );
+            data = getData( token );
+            if ( StringUtils.isNotEmpty( data ) ) {
+                UserAddresseFiscale userAdresseFiscale = MapperService.parse( data, UserAddresseFiscale.class );
+                request.getSession( true ).setAttribute(ATTRIBUTE_ADDRESSEFISCALE, userAdresseFiscale.getAft() );
             }
             String strRedirectUrl = RedirectUtils.getViewUrl( request, FranceConnectSampleApp.VIEW_DEMARCHE_ETAPE2 );
             response.sendRedirect( strRedirectUrl );

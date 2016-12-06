@@ -139,7 +139,6 @@ public class FranceConnectSampleApp extends MVCApplication
         Map<String, Object> model = getModel(  );
         model.put( MARK_FIRSTNAME, _userInfo.getGivenName(  ) );
         model.put( MARK_LASTNAME, _userInfo.getFamilyName(  ) );
-        model.put( MARK_ADDRESS , _userInfo.getAddress(  ));
         _directoryData.setPrenom(_userInfo.getGivenName(  ));
         _directoryData.setNomFamille(_userInfo.getFamilyName(  ));
         return getXPage( TEMPLATE_DEMARCHE_FORM, request.getLocale(  ), model );
@@ -181,7 +180,7 @@ public class FranceConnectSampleApp extends MVCApplication
         model.put( MARK_FORM_DATA, _formData );
         model.put( MARK_FIRSTNAME, _userInfo.getGivenName(  ) );
         model.put( MARK_LASTNAME, _userInfo.getFamilyName(  ) );
-        model.put( MARK_ADDRESS , _userInfo.getAddress(  ));
+        model.put( MARK_ADDRESS , request.getSession(  ).getAttribute(RevenuDataClient.ATTRIBUTE_ADDRESSEFISCALE ));
         _quotientFamilial = (QuotientFamilial) request.getSession(  ).getAttribute(RevenuDataClient.ATTRIBUTE_QUOTIENTFAMILIAL );
         if ( _quotientFamilial != null ) {
             model.put( MARK_QUOTIENT_FAMILIAL, _quotientFamilial );
