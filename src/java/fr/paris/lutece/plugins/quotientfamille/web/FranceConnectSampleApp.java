@@ -78,6 +78,7 @@ public class FranceConnectSampleApp extends MVCApplication
     private static final String TEMPLATE_DEMARCHE_ETAPE2 = "/skin/plugins/quotientfamille/demarche-etape2.html";
     private static final String TEMPLATE_DEMARCHE_FIN = "/skin/plugins/quotientfamille/demarche-etape-fin.html";
     private static final String MARK_LASTNAME = "lastname";
+    private static final String MARK_GENDER = "gender";
     private static final String MARK_FIRSTNAME = "firstname";
     private static final String MARK_FORM_DATA = "form";
     private static final String MARK_QUOTIENT_FAMILIAL = "qf";
@@ -139,6 +140,7 @@ public class FranceConnectSampleApp extends MVCApplication
         Map<String, Object> model = getModel(  );
         model.put( MARK_FIRSTNAME, _userInfo.getGivenName(  ) );
         model.put( MARK_LASTNAME, _userInfo.getFamilyName(  ) );
+        model.put( MARK_GENDER, _userInfo.getGender(  ) );
         _directoryData.setPrenom(_userInfo.getGivenName(  ));
         _directoryData.setNomFamille(_userInfo.getFamilyName(  ));
         return getXPage( TEMPLATE_DEMARCHE_FORM, request.getLocale(  ), model );
